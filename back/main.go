@@ -3,35 +3,10 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/csrf"
-	"github.com/gorilla/mux"
 )
-
-func main() {
-	r := mux.NewRouter()
-
-	// debug
-	csrf.Secure(false)
-
-	csrfMiddleware := csrf.Protect([]byte("32-byte-long-auth-key"))
-
-	api := r.PathPrefix("/api").
-		Subrouter()
-
-	api.Use(csrfMiddleware)
-
-	api.HandleFunc("/token", token).Methods(http.MethodGet)
-	api.HandleFunc("/post", post).Methods(http.MethodOptions) // プリフライトを受け付ける
-	api.HandleFunc("/post", post).Methods(http.MethodPost)
-
-	fmt.Println("http://localhost:8000")
-
-	err := http.ListenAndServe(":8000", r)
-	if err != nil {
-		return
-	}
-}
 
 func token(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
@@ -49,5 +24,37 @@ func post(w http.ResponseWriter, r *http.Request) {
 	_, err := fmt.Fprint(w, r.FormValue("say"))
 	if err != nil {
 		return
+	}
+}
+
+func timeHandler(w http.ResponseWriter, r *http.Request) {
+	tm := time.Now().Format(time.RFC1123)
+	_, err := w.Write([]byte("The time is: " + tm))
+	if err != nil {
+		return
+	}
+}
+
+func main() {
+	mux := http.NewServeMux()
+
+	// debug
+	csrf.Secure(false)
+
+	csrfMiddleware := csrf.Protect([]byte("32-byte-long-auth-key"))
+
+	mux.Handle("/api/token", csrfMiddleware(http.HandlerFunc(token)))
+
+	// OPTIONS, POST
+	mux.Handle("/api/post", csrfMiddleware(http.HandlerFunc(post)))
+
+	// NOTE: HandleFunc
+	mux.Handle("/time", http.HandlerFunc(timeHandler))
+
+	fmt.Println("http://localhost:8000")
+
+	err := http.ListenAndServe(":8000", mux)
+	if err != nil {
+		fmt.Println(err)
 	}
 }
