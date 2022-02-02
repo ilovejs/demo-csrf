@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>demo</title>
+</head>
+<body>
+    <button onclick="submit()">Post Data</button>
+<script>
+    async function submit() {
+        /*
+        * Access to XMLHttpRequest at 'http://localhost:8000/api/post' from origin
+        * 'http://localhost:3000' has been blocked by CORS policy:
+        * No 'Access-Control-Allow-Origin' header is present on the requested resource.
+        * */
+        const instance = axios.create({
+            baseURL: "http://localhost:8000/api",
+            withCredentials: true, // see above
+        })
+
+        // get token After button click
+        // so refresh page would not fetch token
+        const response = await instance.get("/token")
+
+        // set header
+        instance.defaults.headers.post["X-CSRF-Token"] = response.headers["x-csrf-token"]
+
+        // post
+        instance.post(
+            "/post",
+            new URLSearchParams({say: "The World! Stop time!"})
+        ).then(
+            res => alert(res.data)
+        )
+    }
+</script>
+</body>
