@@ -18,11 +18,14 @@ For user who want to see `chrome network panel` breakdowns in parts,
 
 ### Major feature
 
-1. Designed two api endpoint to start.
-2. Js solution with `axios` which is similar to react.
-   - It helps none-mvc, react, mobile developers.
-3. Wrapped in middleware in brunch `diy_middleware`
-
+1. Demoed backend Restful api.
+2. Demoed frontend js for further react adaption.
+   - It helps none-mvc, react, mobile developers to quickly learn csrf practice.
+3. Demoed middleware in brunch `diy_middleware`, 
+   - so backend ppl can make their own middleware.
+4. How to unit test this stuff. Actually, very good place to start learning concept.
+   - it requires minimal effort to run and proof correctness.
+   
 ### Credits
 
 Inspired by this japanese [blog](https://qiita.com/obr-note/items/898f862a6ebe27c45de4)
