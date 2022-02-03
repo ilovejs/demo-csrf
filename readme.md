@@ -2,6 +2,14 @@
 
 Use `gorilla/mux` and `gorilla/csrf`
 
+### How to run
+
+- open goland IDE, run `middleware_test.go` by clicking top green arrow.
+  check logs and code.
+  
+- now open and run `run-be.sh` and `run-fe.sh` by clicking top as well.
+  - refresh browser. To see whole process.
+
 ### Purpose
 
 Official demos are included in its readme and unit test, which is not fully coded out.
