@@ -1,4 +1,4 @@
-## Demo Gorilla csrf + restful js client
+## Demo REST backend Gorilla csrf middleware and Js frontend
 
 Use `gorilla/mux` and `gorilla/csrf`
 
@@ -6,28 +6,37 @@ Use `gorilla/mux` and `gorilla/csrf`
 
 Official demos are included in its readme and unit test, which is not fully coded out.
 
-We need to play with chrome network panel to see:
+For user who want to see `chrome network panel` breakdowns in parts,
 
     Cookie
     Headers
+    Custome Header
 
-It serves as example to further security analysis
+- It serves as example to further security analysis
 
-### Feature:
-1. js solution with `axios` similar to react
-2. middleware latest stack demo
+  You might be interested in fuzz test the encryption :)
+
+### Major feature
+
+1. Designed two api endpoint to start.
+2. Js solution with `axios` which is similar to react.
+   - It helps none-mvc, react, mobile developers.
+3. Wrapped in middleware in brunch `diy_middleware`
 
 ### Credits
 
-inspired by [blog](https://qiita.com/obr-note/items/898f862a6ebe27c45de4)
+Inspired by this japanese [blog](https://qiita.com/obr-note/items/898f862a6ebe27c45de4)
 
-* my innovation:
+### My contrib on top of the blog result
 
-    - slight mod to display error.
+    - html input take dynamic name. 
+      - Let you feel the change rather than hard-value.
+    - more server error hanlding, to know where not work.
+    - add bash to walk pass error on start.
+    - use several branch to demo the use of csrf with popular framework `mux` 
+      or just with `http`. Showed a more flexible and orthogonal solution.
 
-    - add bash
-
-Links:
+### Reference
 
 [owasp](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#use-of-custom-request-headers)
 
