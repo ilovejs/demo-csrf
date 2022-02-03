@@ -29,7 +29,7 @@ For user who want to see `chrome network panel` breakdowns in parts,
 1. Demoed backend Restful api.
 2. Demoed frontend js for further react adaption.
    - It helps none-mvc, react, mobile developers to quickly learn csrf practice.
-3. Demoed middleware in brunch `diy_middleware`, 
+3. Demoed middleware in brunch [diy_middleware](https://github.com/ilovejs/demo-csrf/tree/diy_middleware), 
    - so backend ppl can make their own middleware.
 4. How to unit test this stuff. Actually, very good place to start learning concept.
    - it requires minimal effort to run and proof correctness.
