@@ -4,7 +4,9 @@
     <title>demo</title>
 </head>
 <body>
-    <button onclick="submit()">Post Data</button>
+    <label for="fd1">Enter Your Name</label>
+    <input type="text" name="form_data" id="fd1">
+    <button onclick="submit()">Post</button>
 <script>
     async function submit() {
         /*
@@ -24,10 +26,15 @@
         // set header
         instance.defaults.headers.post["X-CSRF-Token"] = response.headers["x-csrf-token"]
 
+        let formData = document.getElementById("fd1").value
+        console.log("posting: " + formData)
+
         // post
         instance.post(
             "/post",
-            new URLSearchParams({say: "The World! Stop time!"})
+            new URLSearchParams({
+                say: "Hello " + formData
+            })
         ).then(
             res => alert(res.data)
         )

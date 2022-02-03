@@ -38,10 +38,11 @@ func timeHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	mux := http.NewServeMux()
 
-	// debug
-	csrf.Secure(false)
+	csrf.Secure(false) // dev only
+	csrfKey := []byte("32-byte-long-auth-key")
 
-	csrfMiddleware := csrf.Protect([]byte("32-byte-long-auth-key"))
+	//csrfMiddleware := csrf.Protect(csrfKey)
+	csrfMiddleware := CsrfMiddleware(csrfKey)
 
 	mux.Handle("/api/token", csrfMiddleware(http.HandlerFunc(token)))
 
